@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Neon Admin Panel">
+    <meta name="author" content="">
+    <title>岗位推荐</title>
+    <link rel="stylesheet" href="/static/css/jquery-ui-1.10.3.custom.min.css">
+    <link rel="stylesheet" href="/static/css/entypo.css">
+    <link rel="stylesheet" href="/static/css/css.css">
+    <link rel="stylesheet" href="/static/css/bootstrap.css">
+    <link rel="stylesheet" href="/static/css/neon-core.css">
+    <link rel="stylesheet" href="/static/css/neon-theme.css">
+    <link rel="stylesheet" href="/static/css/neon-forms.css">
+    <link rel="stylesheet" href="/static/css/custom.css">
+    <script src="/static/js/jquery-1.11.0.min.js"></script>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+
+
+</head>
+<body class="page-body" data-url="http://neon.dev">
+
+<div class="page-container">
+    <div class="sidebar-menu">
+        <header class="logo-env">
+            <div class="logo">
+                <a href="/myApp/home/">
+                    <h3 style="color: #fff;font-weight: bold;margin-top: 5px;">这里是主界面</h3>
+                </a>
+            </div>
+        </header>
+
+        <div class="sidebar-user-info">
+            <div class="sui-normal">
+                <a href="#" class="user-link">
+                    <img style="width: 95%" src="/media/{{ userInfo.avatar }}" width="120" alt="">
+                </a>
+            </div>
+        </div>
+
+        <ul id="main-menu" class="">
+            <li>
+                <a href="/myApp/home">
+                    <i class="entypo-gauge"></i>
+                    <span>首页</span>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <i class="entypo-user"></i>
+                    <span>个人中心</span>
+                </a>
+                <ul>
+                    <li>
+                        <a href="/myApp/selfInfo">
+                            <span>个人信息</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/myApp/changePassword">
+                            <span>修改密码</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="#">
+                    <i class="entypo-newspaper"></i>
+                    <span>数据统计</span>
+                </a>
+                <ul>
+                    <li>
+                        <a href="/myApp/historyTableData">
+                            <span>历史查阅</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="#">
+                    <i class="entypo-chart-bar"></i>
+                    <span>可视化图表</span>
+                </a>
+                <ul>
+                    <li>
+                        <a href="/myApp/salary">
+
+                            <span>薪资情况</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/myApp/company">
+
+                            <span>企业情况</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/myApp/educational">
+
+                            <span>学历分布</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/myApp/companyStatus">
+
+                            <span>企业融资</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/myApp/address">
+
+                            <span>城市类型</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="opened active">
+                <a href="/myApp/recommend">
+                    <i class="entypo-cog"></i>
+                    <span>岗位推荐</span>
+                </a>
+            </li>
+            <li>
+                <a href="/myApp/forecast">
+                    <i class="entypo-cog"></i>
+                    <span>薪资预测</span>
+                </a>
+            </li>
+        </ul>
+
+    </div>
+    <div class="main-content">
+
+        <div class="row">
+
+            <div style="display:flex;" class="col-md-12 hidden-xs">
+
+                <ul style="margin-left:auto" class="list-inline links-list pull-right">
+
+                    <li class="sep"></li>
+
+                    <li>
+                        <a href="/myApp/logOut">
+                            注销 <i class="entypo-logout right"></i>
+                        </a>
+                    </li>
+                </ul>
+
+            </div>
+
+        </div>
+
+        <hr style="margin-top:0">
+
+        <ol class="breadcrumb bc-3">
+            <li>
+                <a href="#"><i class="entypo-home"></i>岗位推荐</a>
+            </li>
+        </ol>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="panel panel-primary" data-collapsed="0">
+                    <div class="panel-heading">
+                        <div class="panel-title">为你推荐三个最匹配的岗位（结果仅供参考）</div>
+                    </div>
+                    <div class="panel-body">
+                        <table class="table table-bordered datatable" id="table-1">
+                            <style>
+                                th {
+                                    text-align: center; /** 设置水平方向居中 */
+                                    vertical-align: middle /** 设置垂直方向居中 */
+                                }
+                            </style>
+                            <thead>
+                            <tr>
+                                <th>职位名字</th>
+                                <th>工作地点</th>
+                                <th>学历要求</th>
+                                <th>工作经验</th>
+                                <th>工作标签</th>
+                                <th>最高薪水</th>
+                                <th>年底多薪</th>
+                                <th>公司名称</th>
+                                <th>公司福利</th>
+                                <th>公司封面</th>
+                                <th>融资阶段</th>
+                                <th>公司人数</th>
+                                <th>跳转</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for job in tableData2 %}
+                                {% if job.id == type1 or job.id == type2 or job.id == type3 %}
+                                    <tr class="gradeU">
+                                        <td>
+                                            <a target="__blank"
+                                               href="https://www.zhipin.com/web/geek/job?query={{ job.title }}&city=100010000">{{ job.title }}</a>
+                                        </td>
+                                        <td>{{ job.address }}</td>
+                                        <td class="center">{{ job.educational }}</td>
+                                        <td class="center">{{ job.workExperience }}</td>
+                                        <td class="center">{{ job.workTag }}</td>
+                                        <td class="center">{{ job.salary }}</td>
+                                        <td class="center">
+                                            {% if job.salaryMonth != '0' %}
+                                                {{ job.salaryMonth }}薪
+                                            {% else %}
+                                                无
+                                            {% endif %}
+                                        </td>
+                                        <td class="center">
+                                            {{ job.companyTitle }}
+                                        </td>
+                                        <td class="center">
+                                            {{ job.companyTags }}
+                                        </td>
+                                        <td class="center">
+                                            <img src="{{ job.companyAvatar }}" alt="">
+                                        </td>
+                                        <td class="center">
+                                            {{ job.companyStatus }}
+                                        </td>
+                                        <td>
+                                            {{ job.companyPeople }}
+                                        </td>
+                                        <td class="center text-center">
+                                            <a target="_blank" href="{{ job.detailUrl }}" class="btn btn-info"
+                                               style="margin-bottom: 5px">岗位</a>
+                                            <a target="__blank" href="{{ job.companyUrl }}" style="margin-bottom: 5px"
+                                               class="btn btn-success">公司</a>
+                                        </td>
+                                    </tr>
+                                {% endif %}
+                            {% endfor %}
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <footer class="main">
+            CDU.HH
+        </footer>
+    </div>
+
+</div>
+
+
+<link rel="stylesheet" href="/static/css/jquery-jvectormap-1.2.2.css">
+<link rel="stylesheet" href="/static/css/rickshaw.min.css">
+
+<!-- Bottom Scripts -->
+<script src="/static/js/main-gsap.js"></script>
+<script src="/static/js/jquery-ui-1.10.3.minimal.min.js"></script>
+<script src="/static/js/bootstrap.js"></script>
+<script src="/static/js/joinable.js"></script>
+<script src="/static/js/resizeable.js"></script>
+<script src="/static/js/neon-api.js"></script>
+<script src="/static/js/jquery-jvectormap-1.2.2.min.js"></script>
+<script src="/static/js/jquery-jvectormap-europe-merc-en.js"></script>
+<script src="/static/js/jquery-jvectormap-world-mill-en.js"></script>
+<script src="/static/js/jquery.sparkline.min.js"></script>
+<script src="/static/js/d3.v3.js"></script>
+<script src="/static/js/rickshaw.min.js"></script>
+<script src="/static/js/neon-chat.js"></script>
+<script src="/static/js/neon-custom.js"></script>
+<script src="/static/js/neon-demo.js"></script>
+<script src="/static/js/raphael-min.js"></script>
+<script src="/static/js/morris.min.js"></script>
+<link rel="stylesheet" href="/static/css/datatables.responsive.css">
+
+<script src="/static/js/datatables.responsive.js"></script>
+<script src="/static/js/jquery.dataTables.columnFilter.js"></script>
+<script src="/static/js/jquery.dataTables.min.js"></script>
+<script src="/static/js/TableTools.min.js"></script>
+<script src="/static/js/dataTables.bootstrap.js"></script>
+<script src="/static/js/lodash.min.js"></script>
+<script src="/static/js/echarts.js"></script>
+
+</body>
+</html>

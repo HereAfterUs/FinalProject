@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html>
+<html lang="en" >
+<head>
+<meta charset="UTF-8">
+<title>ERROR</title>
+
+<link rel="stylesheet" href="/static/css/style.css">
+
+</head>
+<body>
+
+<section class="wrapper">
+
+	<div class="container">
+
+		<div id="scene" class="scene" data-hover-only="false">
+			<p class="p404" data-depth="0.50">ERROR</p>
+
+		</div>
+
+		<div class="text">
+			<article>
+				<p>{{ errorMsg }}</p>
+				<button id="back">返回上一级页面</button>
+			</article>
+		</div>
+
+	</div>
+</section>
+
+<script src='/static/js/parallax.min.js'></script>
+<script src='/static/js/jquery.min.js'></script>
+<script src="/static/js/script.js"></script>
+<script>
+    var back = document.getElementById('back');
+    back.onclick = function(e){
+        history.back()
+    }
+</script>
+</body>
+</html>
